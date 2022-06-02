@@ -1,9 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+header {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+font-family: 'Acme', sans-serif;
+letter-spacing: 2px;
+margin-bottom: 15px;
+}
