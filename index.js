@@ -31,6 +31,18 @@ class Todo_Class {
     }
 
     display() {
+        this.ulElement.innerHTML = ""
+
+        const liElement = document.createElement("li")
+        const delBtn = document.createElement("i")
+
+        liElement.innerText = object_item.todoText
+        liElement.setAttribute("data-id", object_item.id)
+
+        delBtn.setAttribute("data-id", object_item)
+        delBtn.classList.add("far", "fa-trash-alt")
+
+        liElement.appendChild(delBtn)
 
     }
     
