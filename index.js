@@ -33,6 +33,8 @@ class Todo_Class {
     display() {
         this.ulElement.innerHTML = ""
 
+        todoObjectList.forEach((object_item) => {
+            
         const liElement = document.createElement("li")
         const delBtn = document.createElement("i")
 
@@ -44,6 +46,24 @@ class Todo_Class {
 
         liElement.appendChild(delBtn)
 
+        delBtn.addEventListener("click", function(e) {
+            const deleteId = e.target.getAttribute("data-id")
+            myTodoList.deleteElement(deleteId)
+        })
+
+        liElement.addEventListener("click", function(e) {
+            const selectId = e.target.getAttribute("data-id")
+            myTodoList.done_undone(selectId)
+        })
+
+        if(object_item.isDone){
+            liElement.classList.add("checked")
+        }
+        
+        this.ulElement.appendChild(liElement)
+
+        })
+        
     }
     
 }
