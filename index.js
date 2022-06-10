@@ -2,7 +2,6 @@ const todoObjectList = []
 
 class Todo_Class {
     constructor(item){
-        console.log(item)
         this.ulElement = item
     }
 
@@ -59,7 +58,7 @@ class Todo_Class {
         if(object_item.isDone){
             liElement.classList.add("checked")
         }
-        
+
         this.ulElement.appendChild(liElement)
 
         })
