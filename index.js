@@ -17,7 +17,7 @@ class Todo_Class {
       };
       todoObjectList.unshift(todoObject);
       this.display();
-      document.querySelector("#task").value = "";
+      document.querySelector("#myInput").value = "";
     }
   }
 
