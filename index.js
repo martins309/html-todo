@@ -1,81 +1,79 @@
-const todoObjectList = []
+const todoObjectList = [];
 
 class Todo_Class {
-    constructor(item){
-        this.ulElement = item
+  constructor(item) {
+    this.ulElement = item;
+  }
+
+  add() {
+    const todoInput = document.querySelector("myInput").value;
+    if (todoInput == "") {
+      alert("Dont make me fight you..");
+    } else {
+      const todoObject = {
+        id: todoObjectList.length,
+        todoText: todoInput,
+        isDone: false,
+      };
+      todoObjectList.unshift(todoObject);
+      this.display();
+      document.querySelector("#task").value = "";
     }
+  }
 
-    add() {
-        const todoInput = document.querySelector("myInput").value
-        if(todoInput == ""){
-            alert("Dont make me fight you..")
-        }else {
-            const todoObject = {
-                id: todoObjectList.length,
-                todoText: todoInput,
-                isDone: false,
-            }
-            todoObjectList.unshift(todoObject)
-            this.display()
-            document.querySelector("#task").value = ''
-        }
-    }
+  done_undone(x) {
+    const selectedTodoIndex = todoObjectList.findIndex((item) => item.id == x);
+    console.log(todoObjectList[selectedTodoIndex].isDone);
+    todoObjectList[selectedTodoIndex].isDone == false
+      ? (todoObjectList[selectedTodoIndex].isDone = true)
+      : (todoObjectList[selectedTodoIndex].isDone = false);
+    this.display();
+  }
 
-    done_undone(x) {
-        const selectedTodoIndex = todoObjectList.findIndex((item) => item.id == x)
-        console.log(todoObjectList[selectedTodoIndex].isDone)
-        todoObjectList[selectedTodoIndex].isDone == false ? todoObjectList[
-            selectedTodoIndex].isDone = true : todoObjectList[selectedTodoIndex].isDone = false
-            this.display()
-    }
+  deleteElement(z) {
+    const selectedTodoIndex = todoObjectList.findIndex((item) => item.id == z);
+    todoObjectList.splice(selectedTodoIndex, 1);
+    this.display();
+  }
 
-    deleteElement(z) {
+  display() {
+    this.ulElement.innerHTML = "";
 
-    }
+    todoObjectList.forEach((object_item) => {
+      const liElement = document.createElement("li");
+      const delBtn = document.createElement("i");
 
-    display() {
-        this.ulElement.innerHTML = ""
+      liElement.innerText = object_item.todoText;
+      liElement.setAttribute("data-id", object_item.id);
 
-        todoObjectList.forEach((object_item) => {
-            
-        const liElement = document.createElement("li")
-        const delBtn = document.createElement("i")
+      delBtn.setAttribute("data-id", object_item);
+      delBtn.classList.add("far", "fa-trash-alt");
 
-        liElement.innerText = object_item.todoText
-        liElement.setAttribute("data-id", object_item.id)
+      liElement.appendChild(delBtn);
 
-        delBtn.setAttribute("data-id", object_item)
-        delBtn.classList.add("far", "fa-trash-alt")
+      delBtn.addEventListener("click", function (e) {
+        const deleteId = e.target.getAttribute("data-id");
+        myTodoList.deleteElement(deleteId);
+      });
 
-        liElement.appendChild(delBtn)
+      liElement.addEventListener("click", function (e) {
+        const selectId = e.target.getAttribute("data-id");
+        myTodoList.done_undone(selectId);
+      });
 
-        delBtn.addEventListener("click", function(e) {
-            const deleteId = e.target.getAttribute("data-id")
-            myTodoList.deleteElement(deleteId)
-        })
+      if (object_item.isDone) {
+        liElement.classList.add("checked");
+      }
 
-        liElement.addEventListener("click", function(e) {
-            const selectId = e.target.getAttribute("data-id")
-            myTodoList.done_undone(selectId)
-        })
-
-        if(object_item.isDone){
-            liElement.classList.add("checked")
-        }
-
-        this.ulElement.appendChild(liElement)
-
-        })
-        
-    }
-    
+      this.ulElement.appendChild(liElement);
+    });
+  }
 }
 
+const listSection = document.querySelector("#myUL");
 
-const listSection = document.querySelector('#myUL')
+myTodoList = new Todo_Class(listSection);
 
-myTodoList = new Todo_Class(listSection)
-
-document.querySelector(".addBtn").addEventListener("click", function() {
-    myTodoList.add()
-})
+document.querySelector(".addBtn").addEventListener("click", function () {
+  myTodoList.add();
+});
