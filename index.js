@@ -31,8 +31,8 @@ class Todo_Class {
   }
 
   deleteElement(z) {
-    const selectedTodoIndex = todoObjectList.findIndex((item) => item.id == z);
-    todoObjectList.splice(selectedTodoIndex, 1);
+    const selectedDelIndex = todoObjectList.findIndex((item) => item.id == z);
+    todoObjectList.splice(selectedDelIndex, 1);
     this.display();
   }
 
@@ -46,7 +46,7 @@ class Todo_Class {
       liElement.innerText = object_item.todoText;
       liElement.setAttribute("data-id", object_item.id);
 
-      delBtn.setAttribute("data-id", object_item);
+      delBtn.setAttribute("data-id", object_item.id);
       delBtn.classList.add("far", "fa-trash-alt");
 
       liElement.appendChild(delBtn);
@@ -57,8 +57,8 @@ class Todo_Class {
       });
 
       liElement.addEventListener("click", function (e) {
-        const selectId = e.target.getAttribute("data-id");
-        myTodoList.done_undone(selectId);
+        const selectedId = e.target.getAttribute("data-id");
+        myTodoList.done_undone(selectedId);
       });
 
       if (object_item.isDone) {
@@ -76,4 +76,10 @@ myTodoList = new Todo_Class(listSection);
 
 document.querySelector(".addBtn").addEventListener("click", function () {
   myTodoList.add();
+});
+
+document.querySelector("#myInput").addEventListener("keydown", function (e) {
+  if (e.keyCode == 13) {
+    myTodoList.add();
+  }
 });
