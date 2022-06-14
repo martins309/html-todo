@@ -6,7 +6,7 @@ class Todo_Class {
   }
 
   add() {
-    const todoInput = document.querySelector("myInput").value;
+    const todoInput = document.querySelector("myInput");
     if (todoInput == "") {
       alert("Dont make me fight you..");
     } else {
